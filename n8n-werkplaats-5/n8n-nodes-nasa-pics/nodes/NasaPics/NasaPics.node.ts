@@ -21,13 +21,59 @@ export class NasaPics implements INodeType {
 					},
         ],
         requestDefaults: {
-            baseURL: 'https://api.nasa.gov',
+            baseURL: 'https://api.freecurrencyapi.com/v1/latest', // https://api.nasa.gov | https://api.freecurrencyapi.com/v1/latest
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
         },
 			properties: [
+				{
+					displayName: 'Resource',
+					name: 'resource',
+					type: 'options',
+					noDataExpression: true,
+					options: [
+							{
+									name: 'Currency Transfer',
+									value: 'CurrencyTransfer',
+							},
+							{
+									name: 'Mars Rover Photo',
+									value: 'marsRoverPhotos',
+							},
+					],
+					default: 'CurrencyTransfer',
+				},
+				{
+					displayName: 'Operation',
+					name: 'operation',
+					type: 'options',
+					noDataExpression: true,
+					displayOptions: {
+							show: {
+									resource: [
+											'CurrencyTransfer',
+									],
+							},
+					},
+					options: [
+							{
+									name: 'Get',
+									value: 'get',
+									action: 'Get the currency',
+									description: 'Get the currency',
+									routing: {
+											request: {
+													method: 'GET',
+													url: '?apikey=fca_live_wMvdpym3koDpsQjUvNTF6cZhz8qNCdSUOvnpd1EF&currencies=USD&base_currency=EUR',
+											},
+									},
+							},
+					],
+					default: 'get',
+				},
+				//
 				{
 					displayName: 'Resource',
 					name: 'resource',
