@@ -2,7 +2,7 @@ import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 
 export class NasaPics implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'NASA Pics',
+		displayName: 'Exchange API',
         name: 'NasaPics',
         icon: 'file:nasapics.svg',
         group: ['transform'],
@@ -15,10 +15,10 @@ export class NasaPics implements INodeType {
         inputs: ['main'],
         outputs: ['main'],
         credentials: [
-            {
-                name: 'NasaPicsApi',
-                required: true,
-            },
+					{
+							name: 'NasaPicsApi',
+							required: true,
+					},
         ],
         requestDefaults: {
             baseURL: 'https://api.nasa.gov',
@@ -39,7 +39,7 @@ export class NasaPics implements INodeType {
                         value: 'astronomyPictureOfTheDay',
                     },
                     {
-                        name: 'Mars Rover Photos',
+                        name: 'Mars Rover Photo',
                         value: 'marsRoverPhotos',
                     },
                 ],
@@ -89,7 +89,7 @@ export class NasaPics implements INodeType {
                     {
                         name: 'Get',
                         value: 'get',
-                        action: 'Get Mars Rover photos',
+                        action: 'Get mars rover photos',
                         description: 'Get photos from the Mars Rover',
                         routing: {
                             request: {
@@ -101,7 +101,7 @@ export class NasaPics implements INodeType {
                 default: 'get',
             },
             {
-                displayName: 'Rover name',
+                displayName: 'Rover Name',
                 description: 'Choose which Mars Rover to get a photo from',
                 required: true,
                 name: 'roverName',
@@ -180,8 +180,8 @@ export class NasaPics implements INodeType {
                             },
                         },
                     },
-                ],									
-            }                        
-        ]        
+                ],
+            }
+        ]
 	};
 }
