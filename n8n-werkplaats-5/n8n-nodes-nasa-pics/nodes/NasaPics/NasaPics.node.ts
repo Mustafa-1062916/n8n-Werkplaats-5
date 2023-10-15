@@ -4,7 +4,7 @@ export class NasaPics implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Exchange API',
         name: 'Exchange API',
-        icon: 'file:nasapics.svg',
+        icon: 'file:Exchangeapi.png',
         group: ['transform'],
         version: 1,
         subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
