@@ -6,7 +6,7 @@ import {
 
 export class NasaPicsApi implements ICredentialType {
 	name = 'NasaPicsApi';
-	displayName = 'NASA Pics API';
+	displayName = 'Exchange API';
 	// Uses the link to this tutorial as an example
 	// Replace with your own docs links when building your own nodes
 	documentationUrl = 'https://docs.n8n.io/integrations/creating-nodes/build/declarative-style-node/';
@@ -15,7 +15,7 @@ export class NasaPicsApi implements ICredentialType {
 			displayName: 'API Key',
 			name: 'apiKey',
 			type: 'string',
-			default: '',
+			default: 'fca_live_wMvdpym3koDpsQjUvNTF6cZhz8qNCdSUOvnpd1EF',
 		},
 	];
 	authenticate = {

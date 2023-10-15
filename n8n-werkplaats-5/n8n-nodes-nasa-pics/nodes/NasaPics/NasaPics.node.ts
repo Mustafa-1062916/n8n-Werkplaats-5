@@ -3,7 +3,7 @@ import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 export class NasaPics implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Exchange API',
-        name: 'NasaPics',
+        name: 'Exchange API',
         icon: 'file:nasapics.svg',
         group: ['transform'],
         version: 1,
@@ -15,10 +15,10 @@ export class NasaPics implements INodeType {
         inputs: ['main'],
         outputs: ['main'],
         credentials: [
-					{
-							name: 'NasaPicsApi',
-							required: true,
-					},
+			{
+				name: 'NasaPicsApi',
+				required: true,
+			},
         ],
         requestDefaults: {
             baseURL: 'https://api.freecurrencyapi.com/v1/latest', // https://api.nasa.gov | https://api.freecurrencyapi.com/v1/latest
@@ -27,207 +27,48 @@ export class NasaPics implements INodeType {
                 'Content-Type': 'application/json',
             },
         },
-			properties: [
-				{
-					displayName: 'Resource',
-					name: 'resource',
-					type: 'options',
-					noDataExpression: true,
-					options: [
-							{
-									name: 'Currency Transfer',
-									value: 'CurrencyTransfer',
-							},
-							{
-									name: 'Mars Rover Photo',
-									value: 'marsRoverPhotos',
-							},
-					],
-					default: 'CurrencyTransfer',
-				},
-				{
-					displayName: 'Operation',
-					name: 'operation',
-					type: 'options',
-					noDataExpression: true,
-					displayOptions: {
-							show: {
-									resource: [
-											'CurrencyTransfer',
-									],
-							},
+		properties: [
+			{
+				displayName: 'Operation',
+				name: 'operation',
+				type: 'options',
+				noDataExpression: true,
+				displayOptions: {
+					show: {
+						resource: [
+							'CurrencyTransfer',
+						],
 					},
-					options: [
-							{
-									name: 'Get',
-									value: 'get',
-									action: 'Get the currency',
-									description: 'Get the currency',
-									routing: {
-											request: {
-													method: 'GET',
-													url: '?apikey=fca_live_wMvdpym3koDpsQjUvNTF6cZhz8qNCdSUOvnpd1EF&currencies=USD&base_currency=EUR',
-											},
-									},
-							},
-					],
-					default: 'get',
 				},
-				//
-				{
-					displayName: 'Resource',
-					name: 'resource',
-					type: 'options',
-					noDataExpression: true,
-					options: [
-							{
-									name: 'Astronomy Picture of the Day',
-									value: 'astronomyPictureOfTheDay',
-							},
-							{
-									name: 'Mars Rover Photo',
-									value: 'marsRoverPhotos',
-							},
-					],
-					default: 'astronomyPictureOfTheDay',
-				},
-				{
-					displayName: 'Operation',
-					name: 'operation',
-					type: 'options',
-					noDataExpression: true,
-					displayOptions: {
-							show: {
-									resource: [
-											'astronomyPictureOfTheDay',
-									],
-							},
-					},
-					options: [
-							{
-									name: 'Get',
-									value: 'get',
-									action: 'Get the APOD',
-									description: 'Get the Astronomy Picture of the day',
-									routing: {
-											request: {
-													method: 'GET',
-													url: '/planetary/apod',
-											},
-									},
-							},
-					],
-					default: 'get',
-				},
-				{
-					displayName: 'Operation',
-					name: 'operation',
-					type: 'options',
-					noDataExpression: true,
-					displayOptions: {
-							show: {
-									resource: [
-											'marsRoverPhotos',
-									],
-							},
-					},
-					options: [
-							{
-									name: 'Get',
-									value: 'get',
-									action: 'Get mars rover photos',
-									description: 'Get photos from the Mars Rover',
-									routing: {
-											request: {
-													method: 'GET',
-											},
-									},
-							},
-					],
-					default: 'get',
-				},
-				{
-					displayName: 'Rover Name',
-					description: 'Choose which Mars Rover to get a photo from',
-					required: true,
-					name: 'roverName',
-					type: 'options',
-					options: [
-							{name: 'Curiosity', value: 'curiosity'},
-							{name: 'Opportunity', value: 'opportunity'},
-							{name: 'Perseverance', value: 'perseverance'},
-							{name: 'Spirit', value: 'spirit'},
-					],
-					routing: {
+				options: [
+					{
+						name: 'Get',
+						value: 'get',
+						action: 'Get the currency',
+						description: 'Get the currency',
+						routing: {
 							request: {
-									url: '=/mars-photos/api/v1/rovers/{{$value}}/photos',
+								method: 'GET',
+								url: '?apikey=fca_live_wMvdpym3koDpsQjUvNTF6cZhz8qNCdSUOvnpd1EF&currencies=USD&base_currency=EUR',
 							},
+						},
 					},
-					default: 'curiosity',
-					displayOptions: {
-							show: {
-									resource: [
-											'marsRoverPhotos',
-									],
-							},
+				],
+				default: 'get',
+			},
+			{
+				displayName: 'Resource',
+				name: 'resource',
+				type: 'options',
+				noDataExpression: true,
+				options: [
+					{
+						name: 'Currency Transfer',
+						value: 'CurrencyTransfer',
 					},
-				},
-				{
-					displayName: 'Date',
-					description: 'Earth date',
-					required: true,
-					name: 'marsRoverDate',
-					type: 'dateTime',
-					default:'',
-					displayOptions: {
-							show: {
-									resource: [
-											'marsRoverPhotos',
-									],
-							},
-					},
-					routing: {
-							request: {
-									// You've already set up the URL. qs appends the value of the field as a query string
-									qs: {
-											earth_date: '={{ new Date($value).toISOString().substr(0,10) }}',
-									},
-							},
-					},
-				},
-				{
-					displayName: 'Additional Fields',
-					name: 'additionalFields',
-					type: 'collection',
-					default: {},
-					placeholder: 'Add Field',
-					displayOptions: {
-							show: {
-									resource: [
-											'astronomyPictureOfTheDay',
-									],
-									operation: [
-											'get',
-									],
-							},
-					},
-					options: [
-							{
-									displayName: 'Date',
-									name: 'apodDate',
-									type: 'dateTime',
-									default: '',
-									routing: {
-											request: {
-													// You've already set up the URL. qs appends the value of the field as a query string
-													qs: {
-															date: '={{ new Date($value).toISOString().substr(0,10) }}',
-													},
-											},
-									},
-							},
-					],
-				}
+				],
+				default: 'CurrencyTransfer',
+			},
 		]
 	};
 }
