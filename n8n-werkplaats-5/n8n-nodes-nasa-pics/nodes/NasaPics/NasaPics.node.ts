@@ -1,4 +1,6 @@
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
+// import { IExecuteFunctions } from 'n8n-core';
+// import { LoggerProxy as Logger } from 'n8n-workflow';
 
 export class NasaPics implements INodeType {
     description: INodeTypeDescription = {
@@ -477,4 +479,9 @@ export class NasaPics implements INodeType {
             },
         ],
     };
+
+	// async execute(this: IExecuteFunctions): Promise<any> {
+    //     // Log a message
+    //     Logger.info('WORKING');
+    // }
 }
