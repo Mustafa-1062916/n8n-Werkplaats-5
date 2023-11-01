@@ -20,6 +20,7 @@
 		"sourceMap": true,
 		"skipLibCheck": true,
 		"outDir": "./dist/",
+		"N8N_LOG_LEVEL": "info",//<- TOEGEVOEGD
 	},
 	"include": [
 		"credentials/**/*",
