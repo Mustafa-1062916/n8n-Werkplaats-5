@@ -45,3 +45,9 @@ Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/
 ## License
 
 [MIT](https://github.com/n8n-io/n8n-nodes-starter/blob/master/LICENSE.md)
+
+## How to start your N8N project
+In the terminal, type:
+```
+n8n start
+```
